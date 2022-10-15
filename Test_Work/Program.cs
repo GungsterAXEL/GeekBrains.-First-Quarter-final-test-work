@@ -90,43 +90,14 @@ void CroppedStringArrayPrinter(string[] text)
 
 Console.Clear();
 
-string userText = Console.ReadLine();
-int size = 1, count = default;
+    string userText = String.Empty;
 
-for (int i = 0; i < userText.Length; i++)
-{
-    if (userText[i] == ' ')
-    {
-        size++;
-    }
-}
+    userText = UserInput(userText, "Введите текст:");
+    userText = ExtraSpaceRemover(userText);
 
-string[] textArray = new string[size];
-for (int i = 0; i < userText.Length; i++)
-{
-    if (userText[i] != ' ')
-    {
-        textArray[count] += userText[i];
-    }
-    else count++;
-}
+    int arraySize = StringArraySizer(userText);
 
-Console.Write("\n[");
-for (int i = 0; i < textArray.Length; i++)
-{
-    if (i < textArray.Length - 1) Console.Write($"\"{textArray[i]}\",");
-    else Console.Write($"\"{textArray[i]}\"");
-}
-Console.Write("]");
-
-count = default;
-Console.Write("[");
-for (int i = 0; i < textArray.Length; i++)
-{
-    if (textArray[i].Length < 4)
-    {
-        count++;
-        Console.Write($"\"{textArray[i]}\",");
-    }
-}
-Console.WriteLine("]");
+    string[] stringArray = StringArrayMaker(userText, arraySize);
+    StringArrayPrinter(stringArray);
+    Console.Write(" -> ");
+    CroppedStringArrayPrinter(stringArray);
