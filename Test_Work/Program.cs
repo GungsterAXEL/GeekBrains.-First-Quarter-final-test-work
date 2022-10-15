@@ -8,6 +8,7 @@
 // ["1234", "1567", "-2", "computer science"] -> ["-2"]
 // ["Russia", "Denmark", "Kazan"] -> []
 
+// Метод проверки ввода.
 string UserInput(string text, string message)
 {
     Console.WriteLine(message);
@@ -17,7 +18,7 @@ string UserInput(string text, string message)
     }
     return text;
 }
-
+// Метод удаления лишних пробелов.
 string ExtraSpaceRemover(string text)
 {
     while (text[0] == ' ') text = text.Remove(0, 1);
@@ -28,7 +29,7 @@ string ExtraSpaceRemover(string text)
     }
     return text;
 }
-
+// Метод определения размера будущего массива.
 int StringArraySizer(string text)
 {
     int size = 1;
@@ -41,7 +42,7 @@ int StringArraySizer(string text)
     }
     return size;
 }
-
+// Метод записи значений в массив.
 string[] StringArrayMaker(string text, int size)
 {
     int count = default;
@@ -56,7 +57,7 @@ string[] StringArrayMaker(string text, int size)
     }
     return array;
 }
-
+// Метод вывода на экран всего массива.
 void StringArrayPrinter(string[] text)
 {
     Console.Write("\n[");
@@ -67,7 +68,7 @@ void StringArrayPrinter(string[] text)
     }
     Console.Write("]");
 }
-
+// Метод вывода нужных элементов массива.
 void CroppedStringArrayPrinter(string[] text)
 {
     int count = default;
@@ -88,16 +89,23 @@ void CroppedStringArrayPrinter(string[] text)
     Console.WriteLine("]");
 }
 
-Console.Clear();
+bool restart = true;
+while (restart)
+{
+    Console.Clear();
 
     string userText = String.Empty;
-
+// Запрос ввода от пользователя и удаление лишних пробелов.
     userText = UserInput(userText, "Введите текст:");
     userText = ExtraSpaceRemover(userText);
-
+// Определение размера будущего массива.
     int arraySize = StringArraySizer(userText);
-
+// Создание, запись и печать массива.
     string[] stringArray = StringArrayMaker(userText, arraySize);
     StringArrayPrinter(stringArray);
     Console.Write(" -> ");
     CroppedStringArrayPrinter(stringArray);
+// Запрос на перезапуск.
+    Console.Write("\n'Enter' - Повторить. Что-то другое - Выход.");
+    restart = Console.ReadKey().Key == ConsoleKey.Enter;
+}
